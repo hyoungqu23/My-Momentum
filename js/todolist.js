@@ -23,11 +23,22 @@ function paintToDo(newToDoListItems) {
   toDoListLi.id = newToDoListItems.id;
   toDoListSpan.innerText = `${newToDoListItems.text}`;
   const toDoListBTN = document.createElement('button');
+  const toDoListCheckBox = document.createElement('input');
+  toDoListCheckBox.type = 'checkbox';
   toDoListBTN.innerText = '❌'
   toDoListBTN.addEventListener('click', deleteToDo);
-  toDoListLi.appendChild(toDoListBTN);
+  toDoListCheckBox.addEventListener('click', cancelToDo);
+  toDoListLi.appendChild(toDoListCheckBox);
   toDoListLi.appendChild(toDoListSpan);
+  toDoListLi.appendChild(toDoListBTN);
   toDoListUl.appendChild(toDoListLi);
+  function cancelToDo() {
+    if (toDoListCheckBox.checked === true){
+      toDoListLi.classList.add('canceled');
+    } else {
+      toDoListLi.classList.remove('canceled');
+    }
+  }
 }
 
 function handleToDoSubmit(event) {
